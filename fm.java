@@ -188,7 +188,6 @@ public class fm {
 		see1.setLayout(new GridLayout(1,1));
 		see=new TextArea();see.setEditable(false);
 		see.setBackground(Color.white);
-		see.setFont(new Font("Default",2,14));
 		see.setForeground(Color.DARK_GRAY);
 		see1.add(see);
 		SEE.add(see1);
