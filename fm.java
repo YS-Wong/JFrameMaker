@@ -1,148 +1,20 @@
- class com {
-  private JComponent com;
-  private static JFrame FRM;
-  private Point p;
-  private Object resizeX,resizeY,c,xy;
-  private String kind;
-  private MouseAdapter 拖拽,鼠标效果;
-  com(String kind,String text){
-    c='"';
-    this.kind=kind;
-    FRM=fm.FRM;
-    switch(this.kind){
-      case "JButton":{com=new JButton(text);break;}
-      case "JLabel":{com=new JLabel(text);com.setOpaque(true);break;}
-      case "JTextField":{com=new JTextField(text);break;}
-      case "JTextArea":{com=new JTextArea(text);break;}
-      case "JCheckBox":{com=new JCheckBox(text);break;}
-    }
-  FRM.add(com);
-  com.setBounds(0,0,150,30);
-  com.setBackground(Color.WHITE);
-  拖拽=new MouseAdapter(){
-    public void mouseMoved(MouseEvent e){
-      if(com.getWidth()-e.getX()<10&&com.getHeight()-e.getY()>10)
-        FRM.setCursor(Cursor.getPredefinedCursor(11));
-      else if(com.getHeight()-e.getY()<10&&com.getWidth()-e.getX()>10)
-        FRM.setCursor(Cursor.getPredefinedCursor(9));
-      else
-        FRM.setCursor(Cursor.getPredefinedCursor(13));
-    }
-    public void mousePressed(MouseEvent e) {
-      if(com.getWidth()-e.getX()<10&&com.getHeight()-e.getY()>10){
-        xy=com.getWidth()-e.getX();
-        resizeX=true;
-        resizeY=false;
-      }else if(com.getHeight()-e.getY()<10&&com.getWidth()-e.getX()>10){
-        xy=com.getHeight()-e.getY();
-        resizeY=true;
-        resizeX=false;
-      }else{
-        p=e.getPoint();
-        resizeX=false;
-        resizeY=false;
-      }
-    } 
-    public void mouseDragged(MouseEvent e) {
-      com.setEnabled(false);
-      if((boolean)resizeX){
-        if(e.getX()+(int)xy>35)com.setSize(e.getX()+(int)xy,com.getHeight());
-          FRM.setCursor(Cursor.getPredefinedCursor(11));
-      }else if((boolean)resizeY){
-          if(e.getY()+(int)xy>20)com.setSize(com.getWidth(),e.getY()+(int)xy);
-            FRM.setCursor(Cursor.getPredefinedCursor(9));
-      }else{
-      com.setLocation(com.getX()+e.getX()-p.x,com.getY()+e.getY()-p.y);
-      FRM.setCursor(Cursor.getPredefinedCursor(13));
-      }
-    }
-  };
-鼠标效果=new MouseAdapter(){
-public void mouseEntered(MouseEvent e) {
-e.getComponent().setEnabled(false);
-}
-public void mouseExited(MouseEvent e) {
-e.getComponent().setEnabled(true);
-FRM.setCursor(Cursor.getPredefinedCursor(0));
-}
-};
-com.addMouseListener(拖拽);
-com.addMouseMotionListener(拖拽);
-com.addMouseListener(鼠标效果);
-}
-public String getFirstName(){
-String fn = null;
-switch(this.kind){
-case "JButton":{fn="jb";break;}
-case "JLabel":{fn="jl";break;}
-case "JTextField":{fn="jtf";break;}
-case "JTextArea":{fn="jta";break;}
-case "JCheckBox":{fn="jc";break;}
-}
-return fn;
-}
-public String toString(int i){
-return kind+" "+getFirstName()+i+"=new "+kind+"("+c+getText()+c+");\n"+"jf.add("+getFirstName()+i+");\n" +
-getFirstName()+i+".setBounds("+com.getX()+","+com.getY()+","+com.getWidth()+","+com.getHeight()+");\n";
-}
-public void setText(String text){
-switch(this.kind){
-case "JButton":{((JButton) com).setText(text);break;}
-case "JLabel":{((JLabel) com).setText(text);break;}
-case "JTextField":{((JTextField) com).setText(text);break;}
-case "JTextArea":{((JTextArea) com).setText(text);break;}
-case "JCheckBox":{((JCheckBox) com).setText(text);break;}
-}
-}
-public String getText(){
-String text = null;
-switch(this.kind){
-case "JButton":{text=((JButton) com).getText();break;}
-case "JLabel":{text=((JLabel) com).getText();break;}
-case "JTextField":{text=((JTextField) com).getText();break;}
-case "JTextArea":{text=((JTextArea) com).getText();break;}
-case "JCheckBox":{text=((JCheckBox) com).getText();break;}
-}
-return text;
-}
-public String getKind(){
-return this.kind;
-}
-private void removeListener(){
-com.removeMouseListener(拖拽);
-com.removeMouseMotionListener(拖拽);
-com.removeMouseListener(鼠标效果);
-}
-public void delete(){
-this.removeListener();
-com.setVisible(false);
-this.com=null;
-this.c=null;
-this.kind=null;
-this.p=null;
-this.xy=null;
-this.拖拽=null;
-this.鼠标效果=null;
-this.resizeX=null;
-this.resizeY=null;
-  }
-}
-public class frm{
-  public static void main(String[] args){
-    JFrame jf=new JFrame();
-    jf.setDefaultCloseOperation(3);
-    try{
-      UIManager.setLookAndFeel
-        (UIManager.getSystemLookAndFeelClassName());
-        }catch(Exception e){e.printStackTrace();}
-    jf.setLayout(null);
-    jf.setBounds(30,30,400,270);
-    JButton jb1=new JButton();
-    jf.add(jb1);
-    jb1.setBounds(114,97,150,30);
-    jb1.setCursor(new Cursor(5));
-    jf.setVisible(true);}
-}
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.net.URI;
+import java.util.*;
+
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class fm {
 	static JFrame frm,FRM;
@@ -249,7 +121,8 @@ public class fm {
 						Object[] options = {"I knew"};
 						JOptionPane.showOptionDialog(null,
 						"InputType is dangerous!",
-						"Error",JOptionPane.ERROR_MESSAGE,JOptionPane.ERROR_MESSAGE,null,options,options[0]);}
+						"Error",JOptionPane.ERROR_MESSAGE,JOptionPane.ERROR_MESSAGE,
+						null,options,options[0]);}
 			}
 		});
 		add5.addActionListener(new ActionListener(){
@@ -269,7 +142,8 @@ public class fm {
 				panel.insertTab("Code",null,SEE,null,0);
 				panel.insertTab("About me",null,LOG,null,1);
 				panel.insertTab("new",null,NEW,null,0);
-				see.append("jf.setBounds("+FRM.getLocation().x+","+FRM.getLocation().y+","+FRM.getWidth()+","+FRM.getHeight()+");\n");
+				see.append("jf.setBounds("+FRM.getLocation().x+","+FRM.getLocation().y+","
+					+FRM.getWidth()+","+FRM.getHeight()+");\n");
 				if(!a.isEmpty()){
 					for(int i=0;i<a.size();i++){
 						see.append(a.get(i).toString(i+1));
@@ -378,7 +252,7 @@ public class fm {
 		log1.setFont(new Font("Serif",0,15));log1.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		LOG.add(log1);
 		LOG.add(new JLabel("      * * * * * * * * * * *      "));
-		LOG.add(new JLabel("Copyright ? 2015 WangYixin's Original Software."));
+		LOG.add(new JLabel("Copyright © 2015 WangYixin's Original Software."));
 		LOG.add(new JLabel("All rights reserved."));
 		log1.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
@@ -436,7 +310,7 @@ public class fm {
 			}
 		});
 		}
-	void frm(){
+	void start(){
 		frm=new JFrame();
 		Toolkit kit=Toolkit.getDefaultToolkit();
 		Dimension sc=kit.getScreenSize();
@@ -466,6 +340,6 @@ public class fm {
 	}
 	public static void main(String[] args)throws Exception{
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		new fm().frm();
+		new fm().start();
 	}
 }
