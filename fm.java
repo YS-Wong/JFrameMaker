@@ -18,7 +18,7 @@ import javax.swing.event.DocumentListener;
 
 public class fm {
 	static JFrame frm,FRM;
-	static JPanel WEL,NEW,ADD,SET,SEE,LOG;
+	static JPanel NEW,ADD,SET,SEE,LOG;
 	static JButton see3;
 	static TextArea see;
 	static char c;
@@ -26,7 +26,7 @@ public class fm {
 	static ArrayList<com> a;
 	static com comPointer;
 	
-	void nf(String title){
+	void nf(String title){//This method is used to create a new JFrame which we add Components to 
 		FRM=new JFrame(title+"-Look And Feel");
 		FRM.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		FRM.setBounds(30,30,400,270);
@@ -38,16 +38,17 @@ public class fm {
 					"\njf.setLayout(null);\n");
 		FRM.setVisible(true);
 	}
-	void 初始化(){
+	void initialize(){
 		comPointer=null;
-		see.setText(null);
+		see.setText(null);//"see" is a JTextArea which shows Swing Code
 		a.clear();
 	}
-	fm(){
+	fm(){//All Component of the main JFrame produced by this method include five JPanels
 		c='"';
 		a=new ArrayList<com>();
 		final JTextField set2=new JTextField();
 		final JLabel set1=new JLabel("Set JFrame");
+		//=====================================================NEW
 		NEW=new JPanel();
 		GridLayout ng=new GridLayout(17,0);
 		JLabel new8=new JLabel("Create a new JFrame");
@@ -62,7 +63,7 @@ public class fm {
 		new6.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try{
-					初始化();
+					initialize();
 					nf(new5.getText());
 					set2.setText(new5.getText());
 					if(new7.isSelected()){
@@ -79,7 +80,7 @@ public class fm {
 				}
 			}
 		});
-		//=====================================================
+		//=====================================================ADD
 		ADD=new JPanel();
 		ADD.setLayout(ng);
 		JLabel add4=new JLabel("Add a new Component");
@@ -96,7 +97,7 @@ public class fm {
 		add5.setEnabled(false);
 		JButton add6=new JButton("finish");ADD.add(add6);
 		add3.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
+			public void actionPerformed(ActionEvent e){//Create Component and "com" is a public class
 				try {
 					if(add1.getSelectedIndex()==0){
 						a.add(new com("JButton",add2.getText()));
@@ -160,7 +161,7 @@ public class fm {
 				FRM=null;
 			}
 		});
-		//=====================================================
+		//=====================================================SET
 		SET=new JPanel();
 		SET.setLayout(ng);
 		SET.add(set1);
@@ -181,7 +182,7 @@ public class fm {
 	        	else comPointer.setText(set2.getText());
 	        }
 	    });
-		//=====================================================
+		//=====================================================SEE
 		SEE=new JPanel();
 		SEE.setLayout(null);
 		JPanel see1=new JPanel();
@@ -204,7 +205,8 @@ public class fm {
 				Object[] options = {"I knew"};
 				JOptionPane.showOptionDialog(null,
 				"Copied sussesfully",
-				"Imformation",JOptionPane.INFORMATION_MESSAGE,JOptionPane.INFORMATION_MESSAGE,null,options,options[0]);
+				"Imformation",JOptionPane.INFORMATION_MESSAGE,JOptionPane.INFORMATION_MESSAGE,
+				null,options,options[0]);
 			}
 		});
 		see3.addActionListener(new ActionListener(){
@@ -215,12 +217,14 @@ public class fm {
 					txt.createNewFile();
 					BufferedWriter bw=new BufferedWriter(new FileWriter(txt));
 					bw.write("import javax.swing.*;" +
-							"\npublic class frm{\npublic static void main(String[] args){\n"+see.getText()+"}\n}");
+							"\npublic class frm{\npublic static void main(String[] args){\n"
+							+see.getText()+"}\n}");
 					bw.close();
 					Object[] options = {"I knew"};
 					JOptionPane.showOptionDialog(null,
 							"Saved on Desktop sussesfully\nThe name of the class is "+c+"frm"+c,
-					"Imformation",JOptionPane.INFORMATION_MESSAGE,JOptionPane.INFORMATION_MESSAGE,null,options,options[0]);
+					"Imformation",JOptionPane.INFORMATION_MESSAGE,
+					JOptionPane.INFORMATION_MESSAGE,null,options,options[0]);
 				}catch (Exception E){
 					Object[] options = {"I knew"};
 					JOptionPane.showOptionDialog(null,
@@ -232,7 +236,7 @@ public class fm {
 		see1.setBounds(0,0,330,350);
 		see2.setBounds(0,352,330,23);
 		see3.setBounds(0,375,330,23);
-		//=====================================================
+		//=====================================================LOG
 		LOG=new JPanel();
 		LOG.setLayout(new FlowLayout(FlowLayout.CENTER));
 		LOG.add(new JLabel("Login to enjoy more services:"));
@@ -264,13 +268,15 @@ public class fm {
 						Object[] options = {"I knew"};
 						JOptionPane.showOptionDialog(null,
 						"Visit the web page fails",
-						"Error",JOptionPane.ERROR_MESSAGE,JOptionPane.ERROR_MESSAGE,null,options,options[0]);
+						"Error",JOptionPane.ERROR_MESSAGE,JOptionPane.ERROR_MESSAGE,
+						null,options,options[0]);
 					}
 				}catch(Exception E){
 					Object[] options = {"I knew"};
 					JOptionPane.showOptionDialog(null,
 					"Visit the web page fails",
-					"Error",JOptionPane.ERROR_MESSAGE,JOptionPane.ERROR_MESSAGE,null,options,options[0]);
+					"Error",JOptionPane.ERROR_MESSAGE,JOptionPane.ERROR_MESSAGE,
+					null,options,options[0]);
 				}
 			}
 			public void mouseEntered(MouseEvent e) {
@@ -284,7 +290,7 @@ public class fm {
 			public void actionPerformed(ActionEvent e) {
 				try{
 					double password=0;
-					byte[] b=log2.getText().getBytes();
+					byte[] b=log2.getText().getBytes();//Log in
 					for(int i=0;i<b.length;i++){
 						password=password+b[i];	
 					}
@@ -297,19 +303,21 @@ public class fm {
 						Object[] options = {"I knew"};
 						JOptionPane.showOptionDialog(null,
 						"The password is not true",
-						"Imformation",JOptionPane.INFORMATION_MESSAGE,JOptionPane.ERROR_MESSAGE,null,options,options[0]);
+						"Imformation",JOptionPane.INFORMATION_MESSAGE,JOptionPane.ERROR_MESSAGE,
+						null,options,options[0]);
 					}
 				}catch(Exception e1){
 					log2.setText(null);
 					Object[] options = {"I knew"};
 					JOptionPane.showOptionDialog(null,
 					"The password is not true",
-					"Imformation",JOptionPane.INFORMATION_MESSAGE,JOptionPane.ERROR_MESSAGE,null,options,options[0]);
+					"Imformation",JOptionPane.INFORMATION_MESSAGE,JOptionPane.ERROR_MESSAGE,
+					null,options,options[0]);
 				}
 			}
 		});
 		}
-	void start(){
+	void start(){//Program start from here
 		frm=new JFrame();
 		Toolkit kit=Toolkit.getDefaultToolkit();
 		Dimension sc=kit.getScreenSize();
@@ -338,7 +346,7 @@ public class fm {
 		frm.setVisible(true);
 	}
 	public static void main(String[] args)throws Exception{
-		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());//Change Look-and-feel
 		new fm().start();
 	}
 }
