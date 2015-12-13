@@ -12,8 +12,8 @@ public class com {
 	private Point p;
 	private Object resizeX,resizeY,c,xy;
 	private String kind;
-	private MouseAdapter 拖拽,鼠标效果;
-	com(String kind,String text){
+	private MouseAdapter moved,cursor;
+	com(String kind,String text){//Here is where a new Component was created
 		c='"';
 		this.kind=kind;
 		FRM=fm.FRM;
@@ -27,7 +27,7 @@ public class com {
 		FRM.add(com);
 		com.setBounds(0,0,150,30);
 		com.setBackground(Color.WHITE);
-		拖拽=new MouseAdapter(){
+		moved=new MouseAdapter(){
 			public void mouseMoved(MouseEvent e){
 				if(com.getWidth()-e.getX()<10&&com.getHeight()-e.getY()>10)
 					FRM.setCursor(Cursor.getPredefinedCursor(11));
@@ -37,6 +37,7 @@ public class com {
 					FRM.setCursor(Cursor.getPredefinedCursor(13));
 			}
 			public void mousePressed(MouseEvent e) {
+				//If the cursor is on the right or below edge, Shape will be able to change
 				if(com.getWidth()-e.getX()<10&&com.getHeight()-e.getY()>10){
 					xy=com.getWidth()-e.getX();
 					resizeX=true;
@@ -65,7 +66,7 @@ public class com {
 				}
 			}
 		};
-		鼠标效果=new MouseAdapter(){
+		cursor=new MouseAdapter(){
 			public void mouseEntered(MouseEvent e) {
 				e.getComponent().setEnabled(false);
 			}
@@ -74,9 +75,9 @@ public class com {
 				FRM.setCursor(Cursor.getPredefinedCursor(0));
 			}
 		};
-		com.addMouseListener(拖拽);
-		com.addMouseMotionListener(拖拽);
-		com.addMouseListener(鼠标效果);
+		com.addMouseListener(moved);
+		com.addMouseMotionListener(moved);
+		com.addMouseListener(cursor);
 	}
 	public String getFirstName(){
 		String fn = null;
@@ -91,7 +92,8 @@ public class com {
 	}
 	public String toString(int i){
 		return kind+" "+getFirstName()+i+"=new "+kind+"("+c+getText()+c+");\n"+"jf.add("+getFirstName()+i+");\n" +
-				getFirstName()+i+".setBounds("+com.getX()+","+com.getY()+","+com.getWidth()+","+com.getHeight()+");\n";
+				getFirstName()+i+".setBounds("+com.getX()+","+com.getY()+","
+				+com.getWidth()+","+com.getHeight()+");\n";
 	}
 	public void setText(String text){
 		switch(this.kind){
@@ -117,11 +119,11 @@ public class com {
 		return this.kind;
 	}
 	private void removeListener(){
-		com.removeMouseListener(拖拽);
-		com.removeMouseMotionListener(拖拽);
-		com.removeMouseListener(鼠标效果);
+		com.removeMouseListener(moved);
+		com.removeMouseMotionListener(moved);
+		com.removeMouseListener(cursor);
 	}
-	public void delete(){
+	public void delete(){//Delete all variable
 		this.removeListener();
 		com.setVisible(false);
 		this.com=null;
@@ -129,8 +131,8 @@ public class com {
 		this.kind=null;
 		this.p=null;
 		this.xy=null;
-		this.拖拽=null;
-		this.鼠标效果=null;
+		this.moved=null;
+		this.cursor=null;
 		this.resizeX=null;
 		this.resizeY=null;
 	}
