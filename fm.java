@@ -17,7 +17,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 public class fm {
-	static JFrame frm,FRM;
+	static JFrame frm,FRM;//FRM is a JFrame which we add Components to
 	static JPanel NEW,ADD,SET,SEE,LOG;
 	static JButton see3;
 	static TextArea see;
@@ -26,7 +26,8 @@ public class fm {
 	static ArrayList<com> a;
 	static com comPointer;
 	
-	void nf(String title){//This method is used to create a new JFrame which we add Components to 
+	void nf(String title){
+		//This method is used to create a new JFrame which we add Components to
 		FRM=new JFrame(title+"-Look And Feel");
 		FRM.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		FRM.setBounds(30,30,400,270);
@@ -35,7 +36,7 @@ public class fm {
 				"jf.setDefaultCloseOperation(3);\ntry{UIManager.setLookAndFeel" +
 				"\n(UIManager.getSystemLookAndFeelClassName());" +
 				"\n}catch(Exception e){e.printStackTrace();}"+
-					"\njf.setLayout(null);\n");
+					"\njf.setLayout(null);\n");//Add code into JTextArea here
 		FRM.setVisible(true);
 	}
 	void initialize(){
@@ -124,6 +125,7 @@ public class fm {
 						"InputType is dangerous!",
 						"Error",JOptionPane.ERROR_MESSAGE,JOptionPane.ERROR_MESSAGE,
 						null,options,options[0]);}
+						//In fact, there is almost no Exception would be thrown
 			}
 		});
 		add5.addActionListener(new ActionListener(){
@@ -317,7 +319,8 @@ public class fm {
 			}
 		});
 		}
-	void start(){//Program start from here
+	void start(){
+		//Program start from here
 		frm=new JFrame();
 		Toolkit kit=Toolkit.getDefaultToolkit();
 		Dimension sc=kit.getScreenSize();
