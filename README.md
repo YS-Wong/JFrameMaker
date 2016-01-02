@@ -1,2 +1,2 @@
 # JFrameMaker
-This program can creat Java Swing Code as you like~
+This program can create Java Swing Code as you like~
