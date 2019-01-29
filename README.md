@@ -1,2 +1,2 @@
 # JFrameMaker
-This program can create Java Swing Code as you like~
+用於製作基礎JFrame。
