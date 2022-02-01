@@ -1,2 +1,2 @@
 # JFrameMaker
-用於製作基礎JFrame。
+A simple Java JFrame designer.
